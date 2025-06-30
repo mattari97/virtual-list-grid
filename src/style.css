@@ -1,0 +1,169 @@
+/* ----------------- */
+/* General Reset     */
+/* ----------------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    flex-grow: 1;
+    isolation: isolate;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select,
+a {
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+blockquote {
+    font: inherit;
+    overflow-wrap: break-word;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ----------------- */
+/* Utility classes   */
+/* ----------------- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ----------------- */
+/* General styles    */
+/* ----------------- */
+
+*:focus-visible {
+    outline: 2px dotted red;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background-color: #333;
+    color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#app {
+    overflow-y: auto;
+    width: 40vw;
+    height: 60vh;
+    position: relative;
+    outline: 2px solid green;
+}
+
+.grid {
+    padding-inline: 1rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    grid-auto-rows: max-content;
+    gap: 1rem;
+    position: relative;
+}
+
+.grid-item {
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+    overflow: hidden;
+    text-align: center;
+
+    & > img {
+        width: 100%;
+        aspect-ratio: 2/3;
+    }
+}
+
+input,
+button {
+    margin-top: 1rem;
+    border-radius: 4px;
+    padding: 0.25rem 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+}
