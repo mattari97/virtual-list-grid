@@ -34,7 +34,7 @@ function getItemsPerRow() {
     const itemWidth = sample.offsetWidth;
     grid.removeChild(sample);
 
-    const containerWidth = container.clientWidth;
+    const containerWidth = container.clientWidth - 32;
     return Math.floor(containerWidth / itemWidth);
 }
 
@@ -74,6 +74,7 @@ function setupPool() {
 // --- Scroll handler ---
 function update() {
     const itemsPerRow = getItemsPerRow();
+    console.log(itemsPerRow);
     const scrollTop = container.scrollTop;
     const startRow = Math.floor(scrollTop / ITEM_HEIGHT);
     const startIndex = startRow * itemsPerRow;
