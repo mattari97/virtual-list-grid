@@ -1,8 +1,10 @@
 import './style.css';
-let showSelected = false;
 const TOTAL_ITEMS = 400;
 const VISIBLE_ROWS = 10;
 const ITEM_HEIGHT = 144; // Measured height including margin/gap (adjust if needed)
+
+let showSelected = false;
+let filteredItems = [];
 
 const container = document.getElementById('app');
 
@@ -38,6 +40,10 @@ function getItemsPerRow() {
     return Math.floor(containerWidth / itemWidth);
 }
 
+function getFilteredItems() {
+    return showSelected ? items.filter((item) => item.selected) : items;
+}
+
 // --- Setup pool ---
 let pool = [];
 
@@ -59,6 +65,7 @@ function setupPool() {
             if (-1 !== itemIndex) {
                 const item = items[itemIndex];
                 items[itemIndex].selected = !item.selected;
+                setupPool();
                 update();
             }
         });
@@ -67,22 +74,22 @@ function setupPool() {
     }
 
     // Set spacer height based on total items
-    const totalRows = Math.ceil(TOTAL_ITEMS / itemsPerRow);
+    filteredItems = getFilteredItems();
+    const totalItems = filteredItems.length;
+    const totalRows = Math.ceil(totalItems / itemsPerRow);
     spacer.style.height = `${totalRows * ITEM_HEIGHT}px`;
 }
 
 // --- Scroll handler ---
 function update() {
     const itemsPerRow = getItemsPerRow();
-    console.log(itemsPerRow);
     const scrollTop = container.scrollTop;
     const startRow = Math.floor(scrollTop / ITEM_HEIGHT);
     const startIndex = startRow * itemsPerRow;
 
     grid.style.top = `${startRow * ITEM_HEIGHT}px`;
 
-    const filteredItems = showSelected ? items.filter((item) => item.selected) : items;
-    const totalItems = showSelected ? filteredItems.length : TOTAL_ITEMS;
+    const totalItems = filteredItems.length;
 
     for (let i = 0; i < pool.length; i++) {
         const index = startIndex + i;
@@ -117,6 +124,7 @@ document.getElementById('button').addEventListener('click', () => {
 
     if (-1 !== index) {
         items.splice(index, 1);
+        setupPool();
         update();
     }
 
@@ -125,6 +133,7 @@ document.getElementById('button').addEventListener('click', () => {
 
 document.getElementById('button2').addEventListener('click', () => {
     showSelected = !showSelected;
+    setupPool();
     update();
 });
 
