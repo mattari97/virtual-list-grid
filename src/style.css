@@ -134,11 +134,10 @@ body {
     width: 40vw;
     height: 60vh;
     position: relative;
-    outline: 2px solid green;
 }
 
 .grid {
-    padding-inline: 1rem;
+    padding: 1rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
@@ -156,6 +155,10 @@ body {
     & > img {
         width: 100%;
         aspect-ratio: 2/3;
+    }
+
+    &.selected {
+        outline: 2px solid red;
     }
 }
 
