@@ -41,15 +41,21 @@ const onFilterItems = () => {
     return showSelected ? items.filter((item) => item.selected) : items;
 };
 
+const onWasInitialized = () => {
+    document.querySelector('#app').scrollTop = 0;
+};
+
 const config = {
     selector: '#app',
     items: items,
     itemsGap: 16,
+    inlinePadding: 16,
     className: 'grid',
     bufferCount: 2,
     onCreateItem,
     onUpdateItem,
     onFilterItems,
+    onWasInitialized,
 };
 
 const virtualList = createVirtualList(config);
@@ -63,16 +69,16 @@ document.querySelectorAll('.grid-item').forEach((item) => {
             item.selected = !item.selected;
 
             if (showSelected) {
-                virtualList.refreshSpacer();
+                virtualList.refreshLayoutHeight();
+                return;
             }
 
-            virtualList.updatePool();
+            virtualList.updateVisibleItems();
         }
     });
 });
 
 document.getElementById('button2').addEventListener('click', () => {
     showSelected = !showSelected;
-    virtualList.refreshSpacer();
-    virtualList.updatePool();
+    virtualList.refreshLayoutHeight();
 });
