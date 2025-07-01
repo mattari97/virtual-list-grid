@@ -127,17 +127,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 2rem;
 }
 
 #app {
     overflow-y: auto;
-    width: 40vw;
+    width: min(100%, 980px);
     height: 60vh;
     position: relative;
+    scroll-behavior: smooth;
 }
 
 .grid {
-    padding: 1rem;
+    padding-inline: 1rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
@@ -152,19 +154,22 @@ body {
     overflow: hidden;
     text-align: center;
 
-    & > img {
-        width: 100%;
-        aspect-ratio: 2/3;
-    }
-
     &.selected {
         outline: 2px solid red;
     }
 }
 
-input,
+.img-container {
+    width: 100%;
+    aspect-ratio: 2/3;
+
+    & > img {
+        width: 100%;
+    }
+}
+
 button {
-    margin-top: 1rem;
+    margin-top: 2rem;
     border-radius: 4px;
     padding: 0.25rem 1rem;
     background-color: #f9f9f9;
