@@ -10,6 +10,7 @@ import { createVirtualList } from './virtualList.js';
 const virtual = createVirtualList({
     selector: '#list-container',
     className: 'list-inner',
+    items: Array.from({ lenght: 5000 }, (_, i) => ({ name: `Item ${i + 1}` })),
     itemsGap: 12,
     inlinePadding: 16,
     onCreateItem: () => document.createElement('div'),
