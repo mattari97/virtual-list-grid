@@ -2,7 +2,7 @@ import '../css/style.css';
 import { createVirtualList } from './virtualList';
 let showSelected = false;
 
-const items = Array.from({ length: 200 }, (_, i) => ({
+const items = Array.from({ length: 5000 }, (_, i) => ({
     src: `https://picsum.photos/200/300?random=${i + 1}`,
     label: `Lorem ${i + 1}`,
     pageIndex: i + 1,
@@ -18,6 +18,7 @@ const onCreateItem = () => {
 
     const $img = document.createElement('img');
     $img.classList.add('img');
+    $img.loading = 'lazy';
     $img.src = '';
 
     $imgContainer.appendChild($img);
@@ -78,7 +79,7 @@ document.querySelectorAll('.grid-item').forEach((item) => {
     });
 });
 
-document.getElementById('button2').addEventListener('click', () => {
+document.getElementById('toggle-selected').addEventListener('click', () => {
     showSelected = !showSelected;
     virtualList.refreshLayoutHeight();
 });
